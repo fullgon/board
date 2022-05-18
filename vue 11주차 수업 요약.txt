@@ -1,0 +1,20 @@
+npm install express-session --save
+npm install express-mysql-session --save
+로 라이브러리 다운받은 후
+
+server/app.js 수정 (세션 사용 설정)
+server/routes/index.js 수정 (세션 test용)
+
+mysql workbench에 
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+
+flush privileges;
+작성 후 실행 (mysql 버전차이 때문에 해주는 코드 -> 안하면 오류)
+
+
+
+server/routes/user.js 수정(세션에 user 저장)
+server/routes/board.js 수정(작성자가 있다면 작성자 id저장하고)
+server/model.js 수정(Board와 User를 이어준다)
+client/src/views/board/list.vue 수정(작성자가 있다면 작성자 띄워주기)
+
