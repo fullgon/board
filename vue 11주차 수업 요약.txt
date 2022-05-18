@@ -6,6 +6,7 @@ server/app.js 수정 (세션 사용 설정)
 server/routes/index.js 수정 (세션 test용)
 
 mysql workbench에 
+//password에 내 mysql password 입력하기
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 
 flush privileges;
@@ -14,7 +15,7 @@ flush privileges;
 
 
 server/routes/user.js 수정(세션에 user 저장)
-server/routes/board.js 수정(작성자가 있다면 작성자 id저장하고)
 server/model.js 수정(Board와 User를 이어준다)
+server/routes/board.js 수정(작성자가 있다면 작성자 id저장하고 & Board테이블을 가져올 때 include문으로 User 테이블을 연결한다.)
 client/src/views/board/list.vue 수정(작성자가 있다면 작성자 띄워주기)
 
