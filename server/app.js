@@ -4,6 +4,21 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var session = require("express-session");
+
+var MysqlStore = require("express-mysql-session")(session);
+var options = {
+	host: 'localhost',
+	port: 3306,
+	user: 'root',
+	password: 'itc801',
+	database: 'board'
+};
+
+var sessionStore = new MysqlStore(options);
+
+
+
 //데이터베이스에 연결하려면 Sequelize 인스턴스를 생성해야 한다.
 const { Sequelize } = require('sequelize');
 
@@ -26,6 +41,14 @@ var usersRouter = require('./routes/users');
 var boardRouter = require('./routes/board');
 
 var app = express();
+
+app.use(session({
+	key: 'session_key',
+	secret: 'qwerasdfzxcv',
+	store: sessionStore,
+	resave: false,
+	saveUninitialized: false
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

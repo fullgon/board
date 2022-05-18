@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 router.post("/write", async function(req, res){
+    if(req.session.user){
+        req.body.userId = req.session.user.id;
+    }
     await Board.create(req.body);
     res.json({
         result: "ok"
@@ -21,9 +24,13 @@ router.post("/list", async function(req,res){
     }
     let offset = pager.getSkip(page);
     const boardList = await Board.findAll({
+        include:{
+            model : User,
+            as : "writeUser"
+        },
         limit: itemPerPage,
         offset: offset,
-        orders: [['writeTime', 'DESC']]
+        order: [['writeTime', 'DESC']]
     });
     const count = await Board.count(); //select count(*) from Board
     const nav = pager.getBottomNav(page, count);

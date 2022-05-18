@@ -37,6 +37,12 @@ global.Board = sequelize.define("Board",{
         defaultValue: 0
     }
 })
+
+Board.belongsTo(User,{
+    foreignKey:"userId",
+    as:"writeUser"
+})
+
 /*
 서버가 돌아가는 원리
 
