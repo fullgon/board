@@ -1,6 +1,8 @@
 <template>
   <div class="root">
-      <table>
+      <mjc-header></mjc-header>
+      <div class="teable-container">
+          <table>
           <thead>
               <tr>
                   <th width="80px">글 번호</th>
@@ -24,6 +26,8 @@
               </tr>
           </tbody>
       </table>
+      </div>
+      
 
         <v-pagination v-model="page" @input="changePage" :length="pageCount"></v-pagination>
 
@@ -36,7 +40,11 @@
 
 <script>
 import moment from "moment";
+import MjcHeader from '@/components/MjcHeader.vue';
 export default {
+    components:{
+        MjcHeader,
+    },
     data(){
         return{
             page: 1,
@@ -89,7 +97,7 @@ export default {
 </script>
 
 <style scoped>
-.root{
+.teable-container{
     width: 700px;
     margin: 0 auto;/* 중앙정렬 */ 
 }
