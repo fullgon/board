@@ -8,7 +8,6 @@
         <v-btn color="primary" @click="submit">글쓰기</v-btn>
       </div>
       </div>
-      
   </div>
 </template>
 

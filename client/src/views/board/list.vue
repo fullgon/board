@@ -13,7 +13,7 @@
               </tr>
           </thead>
           <tbody>
-              <tr v-for="board in boardList" :key="board.id">
+              <tr v-for="board in boardList" :key="board.id" @click="clickBoardItem(board)">
                   <td class="text-center">{{board.id}}</td>
                   <td>{{board.title}}</td>
                   <td class="text-center">
@@ -88,6 +88,10 @@ export default {
                 this.boardList = result.data.boardList;
                 this.pageCount = result.data.pageCount;
             })
+        },
+        clickBoardItem(board){
+            console.log(board);
+            this.$router.push("/board/item/"+board.id);
         }
 
     }
