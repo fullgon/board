@@ -25,7 +25,8 @@ const { Sequelize } = require('sequelize');
 //global => 프로젝트의 어디에서든 접근할 수 있다.
 global.sequelize = new Sequelize('board', 'root', 'itc801', {
   host: 'localhost',//mysql의 connection명과 동일하게 설정하는가?
-  dialect: "mysql"//사용하는 DB명
+  dialect: "mysql",//사용하는 DB명
+  logging: false
 });
 
 //model.js가 실행되도록
@@ -51,6 +52,7 @@ app.use(session({
 }));
 
 // view engine setup
+//path.join은 앞과 뒤 경로를 합쳐서 읽을 수 있는 경로로 만들어준다.
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -58,7 +60,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
