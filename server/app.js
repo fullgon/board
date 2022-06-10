@@ -6,7 +6,9 @@ var logger = require('morgan');
 
 var session = require("express-session");
 
+//세션을 DB에 저장하겠다
 var MysqlStore = require("express-mysql-session")(session);
+//세션을 저장할 저장소 설정
 var options = {
 	host: 'localhost',
 	port: 3306,
@@ -46,7 +48,7 @@ var app = express();
 app.use(session({
 	key: 'session_key',
 	secret: 'qwerasdfzxcv',
-	store: sessionStore,
+	store: sessionStore,//세션을 어디에 저장할 것인가
 	resave: false,
 	saveUninitialized: false
 }));
