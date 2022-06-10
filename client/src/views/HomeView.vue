@@ -5,7 +5,7 @@
       <v-text-field v-model="form.id" label="아이디"></v-text-field>
       <v-text-field v-model="form.password" type="password" label="password"></v-text-field>
       <mjc-btn :background="loginBtnBg" fontcolor="white" @click="login" @changeBackground="loginBtnBackground">로그인</mjc-btn>
-      <mjc-btn class="mt-2" background="#0000ff" fontcolor="white">회원가입</mjc-btn>
+      <mjc-btn class="mt-2" background="#0000ff" fontcolor="white" @click="moveJoin">회원가입</mjc-btn>
     </div>
     
   </v-layout>
@@ -51,6 +51,7 @@
         this.axios.post("/api/users/login", this.form)
         .then(result => {
           if(result.data.result == "ok"){
+            this.$store.commit("setUser", result.data.user);
             this.$router.push("/board"); 
           }
           if(result.data.result == "fail"){
